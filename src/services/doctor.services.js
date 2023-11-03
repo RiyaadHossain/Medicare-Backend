@@ -1,13 +1,17 @@
 import DoctorSchema from "../models/DoctorSchema.js";
 
 const getAllDoctors = async () => {
-  const data = await DoctorSchema.find({});
+  const data = await DoctorSchema.find({})
+    .populate("reviews")
+    .select("-password");
 
   return data;
 };
 
 const getSingleDoctor = async (id) => {
-  const data = await DoctorSchema.findById(id);
+  const data = await DoctorSchema.findById(id)
+    .populate("reviews")
+    .select("-password");
 
   return data;
 };

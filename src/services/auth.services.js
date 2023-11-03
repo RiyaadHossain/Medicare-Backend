@@ -32,9 +32,9 @@ const register = async (userData) => {
 const login = async (userData) => {
   const { email, password } = userData;
 
-  const user = await UserSchema.findOne({ email }).lean();
+  let user = await UserSchema.findOne({ email }).lean();
 
-  if (!user) await DoctorSchema.findOne({ email }).lean();
+  if (!user) user = await DoctorSchema.findOne({ email }).lean();
 
   if (!user)
     throw new APIError(httpStatus.NOT_FOUND, "User account doesn't exist!");
@@ -45,7 +45,7 @@ const login = async (userData) => {
     throw new APIError(httpStatus.BAD_REQUEST, "User credential is wrong!");
 
   // Generate Token
-  const payload = { _id: user._id, role: user.role };
+  const payload = { userId: user._id, role: user.role };
   const token = jwtHelper.generateToken(
     payload,
     config.JWT_SECRET,
