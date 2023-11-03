@@ -1,8 +1,9 @@
 import config from "../config/index.js";
-import APIError from "../errors/APIErrors.js";
+import APIError from "../errors/APIError.js";
 
-const globalErrorHandler = (error, req, res, next) => {
-
+// eslint-disable-next-line no-unused-vars
+const globalErrorHandler = (error, _req, res, _next) => {
+  console.log({ error });
   let statusCode = 500;
   let message = "Internal Server Error";
   let errorMessages = [];

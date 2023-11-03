@@ -5,7 +5,7 @@ import DoctorSchema from "../models/DoctorSchema.js";
 import UserSchema from "../models/UserSchema.js";
 import { jwtHelper } from "../helper/jwtHelper.js";
 import config from "../config/index.js";
-import APIError from "../errors/APIErrors.js";
+import APIError from "../errors/APIError.js";
 
 const register = async (userData) => {
   const { email, role } = userData;

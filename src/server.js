@@ -2,11 +2,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import cookieParser from "cookie-parser";
-import { ApplicationRoutes } from "./routes/routes.js";
 import { dbConnection } from "./config/dbConfiq.js";
 import config from "./config/index.js";
 import httpStatus from "http-status";
 import globalErrorHandler from "./middlewares/globalErrorHandler.js";
+import { ApplicationRoutes } from "./routes/index.js";
 dotenv.config();
 
 const app = express();

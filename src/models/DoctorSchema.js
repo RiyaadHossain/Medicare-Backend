@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import config from "../config/index.js";
+import { DOCTOR_PROFILE_STATUS } from "../enums/doctor.js";
 
 const DoctorSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -35,7 +38,7 @@ const DoctorSchema = new mongoose.Schema({
   },
   isApproved: {
     type: String,
-    enum: ["pending", "approved", "cancelled"],
+    enum: DOCTOR_PROFILE_STATUS,
     default: "pending",
   },
   appointments: [{ type: mongoose.Types.ObjectId, ref: "Appointment" }],
@@ -46,7 +49,7 @@ DoctorSchema.pre("save", async function () {
   const user = this;
   user.password = await bcrypt.hash(
     user.password,
-    Number(process.env.BCRYPT_SALT_ROUNDS)
+    Number(config.BCRYPT_SALT_ROUNDS)
   );
 });
 

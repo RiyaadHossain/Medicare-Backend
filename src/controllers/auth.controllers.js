@@ -1,5 +1,5 @@
 import httpStatus from "http-status";
-import { AuthService } from "../services/auth.js";
+import { AuthService } from "../services/auth.services.js";
 import { catchAsync } from "../shared/catchAsync.js";
 
 const register = catchAsync(async (req, res) => {

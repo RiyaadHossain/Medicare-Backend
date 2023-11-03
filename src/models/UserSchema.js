@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { bloodType, gender } from "../enums/common.js";
+import config from "../config/index.js";
 
 const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
@@ -23,7 +24,7 @@ UserSchema.pre("save", async function () {
   const user = this;
   user.password = await bcrypt.hash(
     user.password,
-    Number(process.env.BCRYPT_SALT_ROUNDS)
+    Number(config.BCRYPT_SALT_ROUNDS)
   );
 });
 
