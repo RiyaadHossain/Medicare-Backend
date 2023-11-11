@@ -52,7 +52,7 @@ const login = async (userData) => {
     config.JWT_SECRET_EXPIRE
   );
 
-  return { ...user, token };
+  return { user, token };
 };
 
 export const AuthService = { register, login };
